@@ -175,6 +175,37 @@ body {
     margin: 0;
 }
 
+.education {
+    max-width: 720px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.education h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.education-item h3 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.education-degree {
+    color: #666;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+
 .hobbies {
     max-width: 900px;
     margin: 0 auto 60px;
