@@ -1,0 +1,13 @@
+<section class="travel">
+    <h2>Places I've Visited</h2>
+    <div id="travel-map"></div>
+    <ul class="travel-list">
+        {% for location in travel_locations %}
+        <li><strong>{{ location.country }}:</strong> {{ location.cities }}</li>
+        {% endfor %}
+    </ul>
+    <p class="travel-fun-fact">
+        <strong>Fun fact:</strong> I was born in Montreal, Canada (3 yrs), moved to Hyderabad, India (7 yrs),
+        and moved back to Toronto (9yrs now)!
+    </p>
+</section>
