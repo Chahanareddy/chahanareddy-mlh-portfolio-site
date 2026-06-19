@@ -1,0 +1,12 @@
+<section class="hobbies">
+    <h2>Hobbies</h2>
+    <div class="hobbies-grid">
+        {% for hobby in hobbies %}
+        <div class="hobby-card">
+            <img src="{{ hobby.image }}" alt="{{ hobby.alt }}">
+            <h3>{{ hobby.name }}</h3>
+            <p>{{ hobby.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
