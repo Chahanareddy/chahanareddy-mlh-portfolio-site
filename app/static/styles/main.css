@@ -96,6 +96,56 @@ body {
     font-weight: 700;
 }
 
+.experience {
+    max-width: 720px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.experience h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.experience-item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e8e8ee;
+}
+
+.experience-item:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.experience-item h3 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.experience-date {
+    color: #1d539f;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px;
+}
+
+.experience-company {
+    color: #666;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+
 .hobbies {
     max-width: 900px;
     margin: 0 auto 60px;
