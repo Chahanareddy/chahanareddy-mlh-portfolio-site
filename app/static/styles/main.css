@@ -96,6 +96,35 @@ body {
     font-weight: 700;
 }
 
+.about {
+    max-width: 720px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.about h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.about p {
+    color: #333;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 0 0 16px;
+}
+
+.about p:last-child {
+    margin-bottom: 0;
+}
+
 .experience {
     max-width: 720px;
     margin: 0 auto 60px;
