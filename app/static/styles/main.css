@@ -5,7 +5,7 @@ p, h1, h2, h3, h4, h5, h6, button {
 body {
     background-color: #f5f5f9;
     background-size: cover;
-    width: auto; 
+    width: auto;
     overflow-x: hidden;
     font-family: "Roboto", serif;
     margin: 0px;
@@ -20,10 +20,12 @@ body {
     padding-top: 10px;
 }
 
-.nav-content .logo-touch-target {
-    display: inline-flex;
-    height: 60%;
-    width: 350px;
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .nav-content .nav-logo {
@@ -42,11 +44,24 @@ body {
 }
 
 .nav-content nav {
-    display: block;
-    width: 100%;
-    text-align: right;
-    padding-top: 0px;
-    padding-right: 0px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-right: 24px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    text-decoration: underline;
 }
 
 .profile {
@@ -57,19 +72,19 @@ body {
 }
 
 .profile h1 {
-        font-size: 50px;
-        font-weight: 700;
-        color: white;
+    font-size: 50px;
+    font-weight: 700;
+    color: white;
 }
 
 .profile img {
-        border-radius: 50%;
-        max-width: 100%;
-        max-height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;        
-        padding: 20px;
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding: 20px;
 }
 
 .profile .profile-picture {
@@ -84,17 +99,27 @@ body {
     text-align: center;
 }
 
-.banner .logo {
-    max-width:180px;
-    max-height:60px;
-    width: auto;
-    height: auto;
-}
-
 .banner .title {
     color: white;
     font-size: 50px;
     font-weight: 700;
+}
+
+.section-card {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-card h2 {
+    color: #1d539f;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 24px;
 }
 
 .about {
@@ -205,24 +230,6 @@ body {
     font-size: 15px;
     font-weight: 400;
     margin: 0;
-}
-
-.nav-link {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    margin-right: 24px;
-}
-
-.nav-link:hover {
-    text-decoration: underline;
-}
-
-.nav-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .hobbies {

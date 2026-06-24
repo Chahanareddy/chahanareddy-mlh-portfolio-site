@@ -1,0 +1,9 @@
+<section class="education">
+    <h2>Education</h2>
+    {% for entry in education %}
+    <div class="education-item">
+        <h3>{{ entry.school }}</h3>
+        <p class="education-degree">{{ entry.degree }}</p>
+    </div>
+    {% endfor %}
+</section>

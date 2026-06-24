@@ -1,0 +1,15 @@
+<header class="nav-bar">
+    <div class="nav-content">
+        <a href="{{ url_for('index') }}">
+            <div class="nav-logo">
+                <img src="./static/img/logo.svg" alt="Logo">
+            </div>
+        </a>
+        <nav>
+            {% for page in pages %}
+            <a class="nav-link{% if active_page == page.endpoint %} active{% endif %}"
+                href="{{ url_for(page.endpoint) }}">{{ page.name }}</a>
+            {% endfor %}
+        </nav>
+    </div>
+</header>
