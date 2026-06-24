@@ -15,6 +15,8 @@
         rel="stylesheet">
 
     <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
     <title>{{ title }}</title>
 </head>
@@ -125,5 +127,52 @@
 
         </div>
     </section>
+
+    <section class="travel">
+        <h2>Places I've Visited</h2>
+        <div id="travel-map"></div>
+        <ul class="travel-list">
+            <li><strong>India:</strong> Hyderabad, Delhi, Bengaluru, Goa, Agra, Mumbai</li>
+            <li><strong>Canada:</strong> Toronto, Montreal</li>
+            <li><strong>USA:</strong> New York, Chicago</li>
+            <li><strong>England:</strong> London</li>
+            <li><strong>Germany:</strong> Munich</li>
+        </ul>
+        <p class="travel-fun-fact">
+            <strong>Fun fact:</strong> I was born in Montreal, Canada (3 yrs), moved to Hyderabad, India (7 yrs),
+            and moved back to Toronto (9yrs now)!
+        </p>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const locations = [
+            { name: "Hyderabad, India", lat: 17.3850, lng: 78.4867 },
+            { name: "Delhi, India", lat: 28.6139, lng: 77.2090 },
+            { name: "Bengaluru, India", lat: 12.9716, lng: 77.5946 },
+            { name: "Goa, India", lat: 15.2993, lng: 74.1240 },
+            { name: "Agra, India", lat: 27.1767, lng: 78.0081 },
+            { name: "Mumbai, India", lat: 19.0760, lng: 72.8777 },
+            { name: "Toronto, Canada", lat: 43.6532, lng: -79.3832 },
+            { name: "Montreal, Canada", lat: 45.5017, lng: -73.5673 },
+            { name: "New York, USA", lat: 40.7128, lng: -74.0060 },
+            { name: "Chicago, USA", lat: 41.8781, lng: -87.6298 },
+            { name: "London, UK", lat: 51.5074, lng: -0.1278 },
+            { name: "Munich, Germany", lat: 48.1351, lng: 11.5820 }
+        ];
+
+        const map = L.map("travel-map").setView([30, 20], 2);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        locations.forEach(function (location) {
+            L.marker([location.lat, location.lng])
+                .addTo(map)
+                .bindPopup(location.name);
+        });
+    </script>
 </body>
 </html>
