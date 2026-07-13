@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ title }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background: white;
+            padding: 24px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .timeline-post {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-post h3 {
+            margin-top: 0;
+        }
+
+        .post-email,
+        .post-date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        #message {
+            margin-top: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="timeline-container">
+        <h1>My Timeline</h1>
+
+        <form id="timeline-form">
+            <label for="name">Name</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                required
+            >
+
+            <label for="email">Email</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                required
+            >
+
+            <label for="content">Post</label>
+            <textarea
+                id="content"
+                name="content"
+                required
+            ></textarea>
+
+            <button type="submit">Add Timeline Post</button>
+
+            <p id="message"></p>
+        </form>
+
+        <section>
+            <h2>Timeline Posts</h2>
+            <div id="timeline-posts"></div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById("timeline-form");
+        const postsContainer = document.getElementById("timeline-posts");
+        const message = document.getElementById("message");
+
+        async function loadTimelinePosts() {
+            try {
+                const response = await fetch("/api/timeline_post");
+
+                if (!response.ok) {
+                    throw new Error("Could not retrieve timeline posts.");
+                }
+
+                const data = await response.json();
+
+                postsContainer.innerHTML = "";
+
+                if (data.timeline_posts.length === 0) {
+                    postsContainer.innerHTML =
+                        "<p>No timeline posts have been added yet.</p>";
+                    return;
+                }
+
+                data.timeline_posts.forEach((post) => {
+                    const postElement = document.createElement("article");
+                    postElement.classList.add("timeline-post");
+
+                    const nameElement = document.createElement("h3");
+                    nameElement.textContent = post.name;
+
+                    const emailElement = document.createElement("p");
+                    emailElement.classList.add("post-email");
+                    emailElement.textContent = post.email;
+
+                    const contentElement = document.createElement("p");
+                    contentElement.textContent = post.content;
+
+                    const dateElement = document.createElement("p");
+                    dateElement.classList.add("post-date");
+                    dateElement.textContent =
+                        `Posted: ${new Date(post.created_at).toLocaleString()}`;
+
+                    postElement.append(
+                        nameElement,
+                        emailElement,
+                        contentElement,
+                        dateElement
+                    );
+
+                    postsContainer.appendChild(postElement);
+                });
+            } catch (error) {
+                postsContainer.textContent = error.message;
+            }
+        }
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            message.textContent = "Adding post...";
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("/api/timeline_post", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Could not add the timeline post.");
+                }
+
+                await response.json();
+
+                message.textContent = "Timeline post added successfully!";
+                form.reset();
+
+                await loadTimelinePosts();
+            } catch (error) {
+                message.textContent = error.message;
+            }
+        });
+
+        loadTimelinePosts();
+    </script>
+</body>
+</html>

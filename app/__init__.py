@@ -122,3 +122,11 @@ def delete_timeline_post(post_id):
         "message": "Timeline post deleted successfully",
         "id": post_id,
     }
+
+@app.route('/timeline')
+def timeline():
+    return render_template(
+        'timeline.html',
+        title='Timeline',
+        url=os.getenv("URL"),
+    )
