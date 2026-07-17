@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
-from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField
+from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, SqliteDatabase
 import datetime
 from playhouse.shortcuts import model_to_dict
 
@@ -10,15 +10,17 @@ from app.data import education, experiences, hobbies, map_locations, pages, trav
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
+if os.getenv("TESTING", "").lower() == "true":
+    mydb = SqliteDatabase(":memory:")
+else:
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
+    )
 
-print(mydb)
 
 class TimelinePost(Model):
     name = CharField()
@@ -29,8 +31,9 @@ class TimelinePost(Model):
     class Meta:
         database = mydb
 
-mydb.connect()
-mydb.create_tables([TimelinePost])
+if mydb.is_closed():
+    mydb.connect()
+mydb.create_tables([TimelinePost], safe=True)
 
 @app.context_processor
 def inject_menu():
@@ -87,9 +90,12 @@ def travel_page():
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    name = request.form.get('name', '').strip()
+    email = request.form.get('email', '').strip()
+    content = request.form.get('content', '').strip()
+
+    if not name or not email or not content:
+        return {"error": "Invalid timeline post"}, 400
 
     timeline_post = TimelinePost.create(
         name=name,
