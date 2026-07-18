@@ -96,6 +96,24 @@ class TestTimelinePostApi(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json["error"], "Invalid timeline post")
 
+    def test_create_timeline_post_rejects_blank_email(self):
+        response = self.client.post(
+            "/api/timeline_post",
+            data={"name": "No Email", "email": "   ", "content": "Missing email."},
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json["error"], "Invalid timeline post")
+
+    def test_create_timeline_post_rejects_blank_name(self):
+        response = self.client.post(
+            "/api/timeline_post",
+            data={"name": "   ", "email": "blank@example.com", "content": "Missing name."},
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json["error"], "Invalid timeline post")
+
     def test_delete_missing_timeline_post_returns_404(self):
         response = self.client.delete("/api/timeline_post/999")
 
