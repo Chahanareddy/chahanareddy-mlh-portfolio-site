@@ -1,10 +1,12 @@
 <header class="nav-bar">
     <div class="nav-content">
-        <a href="{{ url_for('index') }}">
-            <div class="nav-logo">
-                <img src="./static/img/logo.svg" alt="Logo">
-            </div>
-        </a>
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}" class="nav-logo-link">
+                <img src="./static/img/logo.svg" alt="MLH Fellowship" class="nav-logo-img">
+            </a>
+            <span class="nav-brand-x" aria-hidden="true">&times;</span>
+            <img src="./static/img/meta-logo.png" alt="Meta" class="nav-meta-logo">
+        </div>
         <nav>
             {% for page in pages %}
             <a class="nav-link{% if active_page == page.endpoint %} active{% endif %}"
