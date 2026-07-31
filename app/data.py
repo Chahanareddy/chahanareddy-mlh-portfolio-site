@@ -99,3 +99,21 @@ map_locations = [
     {"name": "London, UK", "lat": 51.5074, "lng": -0.1278},
     {"name": "Munich, Germany", "lat": 48.1351, "lng": 11.5820},
 ]
+
+socials = [
+    {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/chahana-reddy-952a43281/",
+        "icon": "linkedin",
+    },
+    {
+        "name": "GitHub",
+        "url": "https://github.com/Chahanareddy",
+        "icon": "github",
+    },
+    {
+        "name": "X",
+        "url": "https://x.com/chahana_reddy",
+        "icon": "x",
+    },
+]
