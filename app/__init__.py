@@ -5,7 +5,7 @@ from peewee import MySQLDatabase, Model, CharField, TextField, DateTimeField, Sq
 import datetime
 from playhouse.shortcuts import model_to_dict
 
-from app.data import education, experiences, hobbies, map_locations, pages, travel_locations
+from app.data import education, experiences, hobbies, map_locations, pages, socials, travel_locations
 
 load_dotenv()
 app = Flask(__name__)
@@ -45,7 +45,12 @@ def inject_menu():
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Chahana Reddy", url=os.getenv("URL"))
+    return render_template(
+        'index.html',
+        title="Chahana Reddy",
+        url=os.getenv("URL"),
+        socials=socials,
+    )
 
 
 @app.route('/experience')
